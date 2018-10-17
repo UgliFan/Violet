@@ -1,0 +1,118 @@
+{
+  "name": "violet",
+  "version": "1.0.0",
+  "description": "react",
+  "main": "index.js",
+  "scripts": {
+    "build:tbk_fe": "better-npm-run bd:tbk_fe",
+    "build:tbk_fe:prod": "better-npm-run bd:tbk_fe:pd",
+    "start:tbk_fe:client": "better-npm-run st:tbk_fe:c",
+    "start:tbk_fe:server": "better-npm-run st:tbk_fe:s",
+    "lint": "eslint --ext .js,.jsx src",
+    "fix": "eslint --fix --ext .js,.jsx src",
+    "test": "jest"
+  },
+  "betterScripts": {
+    "bd:tbk_fe": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' NODE_ENV='local' better-npm-run bd",
+    "bd:tbk_fe:pd": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' NODE_ENV='production' better-npm-run bd",
+    "st:tbk_fe:c": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' better-npm-run fe",
+    "st:tbk_fe:s": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' better-npm-run be",
+    "fe": {
+      "command": "\"./node_modules/.bin/webpack-serve\" --config ./build/wpc.client.js",
+      "env": {
+        "NODE_ENV": "local",
+        "DEBUG": "app:*",
+        "HOT_RELOAD": true
+      }
+    },
+    "be": {
+      "command": "\"./node_modules/.bin/nodemon\" server.js -p ./build/wpc.all.js --watch ./build/dev-runtime.js",
+      "env": {
+        "NODE_ENV": "local",
+        "DEBUG": "app:*"
+      }
+    },
+    "bd": "better-npm-run pack:all",
+    "pack:all": {
+      "command": "\"./node_modules/.bin/webpack\" --config ./build/wpc.all.js",
+      "env": {
+        "DEBUG": "app:*"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UgliFan/Violet.git"
+  },
+  "keywords": [
+    "react",
+    "frontend"
+  ],
+  "author": "uglifan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UgliFan/Violet/issues"
+  },
+  "homepage": "https://github.com/UgliFan/Violet#readme",
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "immutable": "^3.8.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-helmet": "latest",
+    "react-redux": "latest",
+    "react-router": "^4.3.1",
+    "react-router-config": "latest",
+    "react-router-dom": "latest",
+    "redux": "latest",
+    "redux-thunk": "latest"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-decorators": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "autoprefixer": "^9.2.0",
+    "babel-loader": "^8.0.4",
+    "better-npm-run": "^0.1.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "connect-history-api-fallback": "^1.5.0",
+    "cross-env": "^5.1.1",
+    "css-loader": "^1.0.0",
+    "cssnano": "^4.1.4",
+    "eslint": "^5.7.0",
+    "eslint-loader": "^2.1.1",
+    "extract-css-chunks-webpack-plugin": "^3.2.0",
+    "file-loader": "^2.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "hash-sum": "^1.0.2",
+    "history": "^4.7.2",
+    "html-webpack-plugin": "^3.2.0",
+    "jsx-loader": "^0.13.2",
+    "koa": "^2.4.1",
+    "koa-connect": "^2.0.1",
+    "koa-router": "^7.2.1",
+    "koa-webpack": "^5.1.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "lodash.template": "^4.4.0",
+    "memory-fs": "^0.4.1",
+    "nodemon": "^1.12.1",
+    "postcss-import": "^12.0.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.1.1",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.20.2",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2",
+    "webpack-serve": "^2.0.2",
+    "webpackbar": "^2.6.3"
+  }
+}
