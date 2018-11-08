@@ -23,7 +23,7 @@ const run = async (initState) => {
     );
 };
 
-if (window.__INITIAL_STATE__) {
+if (typeof window !== 'undefined' && window.__INITIAL_STATE__) {
     run(window.__INITIAL_STATE__).then(app => {
       ReactDOM.hydrate(app, document.getElementById('server-app'))
     });

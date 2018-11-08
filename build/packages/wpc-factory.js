@@ -183,7 +183,7 @@ module.exports = class ConfigFactory {
                             to: (context) => {
                                 const { pathname } = context.parsedUrl;
                                 if (pathname.indexOf(publicPath) === -1) {
-                                    return publicPath + '/index.html';
+                                    return `${publicPath}/${projectName}.${buildEnv}.degrade.html`;
                                 } else {
                                     return pathname;
                                 }
