@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import AsyncDataRouter from 'g-public/AsyncDataRouter';
-
+import AsyncDataRouter from '~public/AsyncDataRouter';
 import App from '~/App';
 
 const run = async () => {
@@ -24,5 +23,5 @@ const run = async () => {
 };
 
 run().then(app => {
-    ReactDOM.render(app, document.getElementById('demo-app'))
+    ReactDOM.render(app, document.getElementById('app'))
 });

@@ -165,7 +165,7 @@ module.exports = class ConfigFactory {
                     'redux$': `redux/dist/redux${buildEnv === 'production'?'.min':''}.js`,
                     'react-redux$': `react-redux/dist/react-redux${buildEnv === 'production'?'.min':''}.js`,
                     'assets': path.join(workingpath, 'src', projectName, 'assets'),
-                    'g-public': path.join(workingpath, 'src', 'public'),
+                    '~public': path.join(workingpath, 'src', 'public'),
                     '~axios': path.join(workingpath, 'src', 'public', 'js', 'axios', 'caxios.js')
                 }
             },

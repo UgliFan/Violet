@@ -72,7 +72,8 @@
     "react-router-config": "latest",
     "react-router-dom": "latest",
     "redux": "latest",
-    "redux-thunk": "latest"
+    "redux-thunk": "latest",
+    "throttle-debounce": "^2.0.1"
   },
   "dependencies": {
     "@babel/cli": "^7.0.0",
