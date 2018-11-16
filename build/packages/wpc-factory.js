@@ -29,6 +29,7 @@ const defaultMeta = {
 };
 
 function getOptions({ buildEnv, projectName }) {
+    console.log(path.resolve(workingpath, 'src', projectName, 'entry-server.js'));
     return {
         clientEntry: [path.resolve(workingpath, 'src', projectName, 'entry-client.js')],
         serverEntry: [path.resolve(workingpath, 'src', projectName, 'entry-server.js')],
@@ -164,9 +165,9 @@ module.exports = class ConfigFactory {
                     'react-router-dom$': `react-router-dom/umd/react-router-dom${buildEnv === 'production'?'.min':''}.js`,
                     'redux$': `redux/dist/redux${buildEnv === 'production'?'.min':''}.js`,
                     'react-redux$': `react-redux/dist/react-redux${buildEnv === 'production'?'.min':''}.js`,
-                    'assets': path.join(workingpath, 'src', projectName, 'assets'),
-                    '~public': path.join(workingpath, 'src', 'public'),
-                    '~axios': path.join(workingpath, 'src', 'public', 'js', 'axios', 'caxios.js')
+                    'assets': path.resolve(workingpath, 'src', projectName, 'assets'),
+                    '~public': path.resolve(workingpath, 'src', 'public'),
+                    '~axios': path.resolve(workingpath, 'src', 'public', 'js', 'axios', 'caxios.js')
                 }
             },
             stats: 'minimal',
@@ -197,7 +198,7 @@ module.exports = class ConfigFactory {
 
         if (buildEnv !== 'local') {
             this._config.plugins.push(new CleanWebpackPlugin([projectName], {
-                root: path.join(workingpath, 'dist')
+                root: path.resolve(workingpath, 'dist')
             }));
         }
     }
@@ -221,7 +222,7 @@ module.exports = class ConfigFactory {
             plugins: [
                 new HtmlWebpackPlugin({
                     filename: buildEnv === 'production' ? `${projectName}.template.html` : `${projectName}.${buildEnv}.template.html`,
-                    template: path.join(workingpath, 'src', projectName, `template.html`),
+                    template: path.resolve(workingpath, 'src', projectName, `template.html`),
                     inject: false,
                     hash: true,
                     minify: {
@@ -235,7 +236,7 @@ module.exports = class ConfigFactory {
                 new HtmlWebpackPlugin({
                     filename: buildEnv === 'production' ? `${projectName}.degrade.html` : `${projectName}.${buildEnv}.degrade.html`,
                     template: path.resolve(__dirname, './html-webpack-template.js'),
-                    realTemplate: degradeHtmlPath || path.join(workingpath, 'src', projectName, 'degrade.html'),
+                    realTemplate: degradeHtmlPath || path.resolve(workingpath, 'src', projectName, 'degrade.html'),
                     title: defaultTitle,
                     meta: defaultMeta,
                     inject: 'body',
@@ -318,7 +319,7 @@ module.exports = class ConfigFactory {
                 filename: 'index.js',
                 libraryTarget: 'umd'
             },
-            externals: nodeExternals({ modulesDir: path.join(workingpath, 'node_modules') })
+            externals: nodeExternals({ modulesDir: path.resolve(workingpath, 'node_modules') })
         }, customConfig);
     }
 }
