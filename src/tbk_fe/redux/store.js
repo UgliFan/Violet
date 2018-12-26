@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from '~/redux/reducers';
+import reducer from '&/redux/reducers';
 
 const finalCreateStore = applyMiddleware(thunk)(createStore);
 //从window对象中获取redux谷歌浏览器插件对象如果存在就使用

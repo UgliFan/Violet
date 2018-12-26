@@ -1,4 +1,4 @@
-import { SET_USERINFO } from '~/redux/actions/user';
+import { SET_USERINFO } from '&/redux/actions/user';
 
 const user = {
     uid: null,

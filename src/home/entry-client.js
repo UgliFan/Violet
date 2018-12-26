@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import AsyncDataRouter from '~public/AsyncDataRouter';
-import App from '~/App';
+import AsyncDataRouter from '&public/AsyncDataRouter';
+import App from '&/App';
 
 const run = async () => {
     const routes = [{

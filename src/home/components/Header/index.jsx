@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './header.less';
-import { throttle } from 'throttle-debounce';
-import { getScrollTop } from '~public/utils';
 
 export default class HeaderNav extends Component {
     constructor() {
@@ -9,35 +7,20 @@ export default class HeaderNav extends Component {
         this.state = {
             opacity: 0
         };
-        this.scrollHander = throttle(16, false, () => {
-            let scrollTop = getScrollTop(window.document.querySelector('.home-page'));
-            if (scrollTop > 600) {
-                this.setState({
-                    opacity: 1
-                });
-            } else {
-                this.setState({
-                    opacity: Number(scrollTop / 600).toFixed(3)
-                });
-            }
-        });
-    }
-    bindEvents() {
-        window.document.querySelector('.home-page').addEventListener('scroll', this.scrollHander, false);
-    }
-    unBindEvents() {
-        window.document.querySelector('.home-page').removeEventListener('scroll', this.scrollHander, false);
     }
     componentDidMount() {
-        this.bindEvents();
-    }
-    componentWillUnmount() {
-        this.unBindEvents();
+        let timer = setTimeout(() => {
+            this.setState({
+                opacity: 1
+            });
+            clearTimeout(timer);
+        }, 200);
     }
     render() {
         return (
             <div className="header-nav">
-                <div className="highlight" style={{opacity: this.state.opacity}}></div>
+                <div className="logo"></div>
+                <div className="highlight" style={{opacity: this.state.opacity}}>欢迎来到</div>
             </div>
         );
     }

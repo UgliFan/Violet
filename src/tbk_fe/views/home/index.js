@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actionUserInfo } from '~/redux/info.redux';
+import { actionUserInfo } from '&/redux/info.redux';
 
 // @connect(state => state, {
 //     actionUserInfo
