@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
-        <title>Welcome to UgliFan's home. (degrade)</title>
+        <title>Welcome to UgliFan's home.</title>
         <script>
-            (function() {
+            function setFontSize () {
                 var design = 750,
                     font = 100,
                     result = null,
@@ -35,7 +35,9 @@
                 if (cptFS !== result) {
                     $html.style.fontSize = result * (result / cptFS) + 'px';
                 }
-            })()
+            }
+            setFontSize();
+            window.addEventListener('resize', setFontSize, false);
         </script>
     </head>
     <body>
