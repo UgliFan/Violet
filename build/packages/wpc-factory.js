@@ -35,7 +35,7 @@ function getOptions({ buildEnv, projectName }) {
         serverEntry: [path.resolve(workingpath, 'src', projectName, 'entry-server.js')],
         outputJsName: buildEnv === 'production' ? `${projectName}.js` : `${projectName}.${buildEnv}.js`,
         outputCssName: buildEnv === 'production' ? `css/${projectName}.[id].css` : `css/${projectName}.[id].${buildEnv}.css`,
-        publicPath: buildEnv === 'local' ?  '/static/' : `//s.xxx.com/static/${projectName}/`,
+        publicPath: buildEnv === 'local' ?  '/static/' : `//uglifan.cn/static/${projectName}/`,
         outputPath: path.resolve(workingpath, 'dist', projectName)
     };
 }
