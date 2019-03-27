@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import { withRouter, Route } from 'react-router';
-import { matchRoutes } from 'react-router-config';
+import React, { Component } from 'react'
+import { withRouter, Route } from 'react-router'
+import { matchRoutes } from 'react-router-config'
 
 const loadBranchData = (store, routes, location) => {
     const branch = matchRoutes(routes, location.pathname);
-
     const promises = branch.map(({ route, match }) => {
-        return route.component.loadData
-            ? route.component.loadData(store, match, location)
-            : Promise.resolve(null);
+        return route.component.loadData && route.component.loadData(store, match, location)
     })
-    return Promise.all(promises);
+    return Promise.all(promises)
 }
 
 class LocationChangeRouter extends Component {
@@ -24,19 +21,18 @@ class LocationChangeRouter extends Component {
     // only support react 16 ?
     UNSAFE_componentWillMount() {
         const { initState, routes, store, location } = this.props
-
         if (!initState) {
             // only active at  window.__INITIAL_STATE__ is not defined
             loadBranchData(store, routes, location).then(data => {
                 this.setState({
                     previousLocation: null,
                     showChildren: true
-                });
-            });
+                })
+            })
         } else {
             this.setState({
                 showChildren: true
-            });
+            })
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -45,22 +41,27 @@ class LocationChangeRouter extends Component {
         if (navigated) {
             this.setState({
                 previousLocation: this.props.location
-            });
-
+            })
             loadBranchData(store, routes, location).then(data => {
                 this.setState({
-                    previousLocation: null,
-                });
-            });
+                    previousLocation: null
+                })
+            })
         }
     }
     render() {
-        const { children, location } = this.props;
-        const { previousLocation, showChildren } = this.state;
+        const { children, location } = this.props
+        const { previousLocation, showChildren } = this.state
         return (
-            <Route location={previousLocation || location} render={()=> { if (showChildren) { return children } else { return null } }} />
-        );
+            <Route
+                location={previousLocation || location}
+                render={()=> {
+                    if (showChildren) return children
+                    return null
+                }}
+            />
+        )
     }
 }
 
-export default withRouter(LocationChangeRouter);
+export default withRouter(LocationChangeRouter)

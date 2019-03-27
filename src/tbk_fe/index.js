@@ -1,7 +1,8 @@
 import App from '&/App';
-import store from '&/redux/store';
+import initRedux from '&/redux';
 
 export default function createApp(context) {
+    const store = initRedux(context.initState)
     const routes = [{
         path: '/',
         component: App,

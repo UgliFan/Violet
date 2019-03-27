@@ -2,8 +2,41 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>VIOLET</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+        <title>Welcome to UgliFan's home. (degrade)</title>
+        <script>
+            (function() {
+                var design = 750,
+                    font = 100,
+                    result = null,
+                    $html = window.document.documentElement,
+                    ua = window.navigator.userAgent;
+                var h5Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
+                var isH5 = false;
+                for (var i = 0; i < h5Agents.length; i++) {
+                    if (ua.indexOf(h5Agents[i]) > -1) {
+                        isH5 = true; break;
+                    }
+                }
+                var ratio = design / font;
+                var screenWidth = $html.offsetWidth;
+                if (screenWidth > design) {
+                    result = font;
+                } else if (screenWidth < 320) {
+                    result = 320 / ratio;
+                } else {
+                    result = screenWidth / ratio;
+                }
+                result = Math.ceil(result * 100) / 100;
+                if (!isH5 && result > 50) result = 50;
+                $html.style.fontSize = result + 'px';
+                var cptFS = window.getComputedStyle(document.getElementsByTagName('html')[0]).fontSize.replace('px', '');
+                cptFS = Number(cptFS);
+                if (cptFS !== result) {
+                    $html.style.fontSize = result * (result / cptFS) + 'px';
+                }
+            })()
+        </script>
     </head>
     <body>
         <div id="app"></div>

@@ -12,12 +12,10 @@ const NODE_ENV = process.env.NODE_ENV || 'local';
 
 const defaultTitle = '';
 const defaultMeta = {
-    0: { charset: "utf-8" },
     1: { 'http-equiv': "X-UA-Compatible", content: "IE=edge" },
     renderer: "webkit",
     description: "",
-    keywords: "",
-    spm_prefix: "0"
+    keywords: ""
 };
 
 program.version(packageJson.version)
