@@ -4,10 +4,8 @@
   "description": "react",
   "main": "index.js",
   "scripts": {
-    "build:home": "better-npm-run bd:home",
     "build:home:prod": "better-npm-run bd:home:pd",
     "start:home:client": "better-npm-run st:home:c",
-    "build:tbk_fe": "better-npm-run bd:tbk_fe",
     "build:tbk_fe:prod": "better-npm-run bd:tbk_fe:pd",
     "start:tbk_fe:client": "better-npm-run st:tbk_fe:c",
     "start:tbk_fe:server": "better-npm-run st:tbk_fe:s",
@@ -16,10 +14,8 @@
     "test": "jest"
   },
   "betterScripts": {
-    "bd:home": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='home' NODE_ENV='local' better-npm-run bd",
     "bd:home:pd": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='home' NODE_ENV='production' better-npm-run bd",
     "st:home:c": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='home' better-npm-run fe",
-    "bd:tbk_fe": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' NODE_ENV='local' better-npm-run bd",
     "bd:tbk_fe:pd": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' NODE_ENV='production' better-npm-run bd",
     "st:tbk_fe:c": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' better-npm-run fe",
     "st:tbk_fe:s": "\"./node_modules/.bin/cross-env\" PROJECT_NAME='tbk_fe' better-npm-run be",
