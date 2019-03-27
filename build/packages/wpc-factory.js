@@ -213,55 +213,58 @@ module.exports = class ConfigFactory {
      */
     buildClientConfig (customConfig = {}) {
         const { clientEntry, projectName, mode, buildEnv, degradeHtmlPath } = this._options;
+        let plugins = [
+            new HtmlWebpackPlugin({
+                filename: buildEnv === 'production' ? `${projectName}.degrade.html` : `${projectName}.${buildEnv}.degrade.html`,
+                template: path.resolve(__dirname, './html-webpack-template.js'),
+                realTemplate: degradeHtmlPath || path.resolve(workingpath, 'src', projectName, 'degrade.html'),
+                title: defaultTitle,
+                meta: defaultMeta,
+                inject: 'body',
+                minify: {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true
+                }
+            }),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: `'${buildEnv}'`,
+                    [`REAÇT_ENV`]: '"client"',
+                }
+            }),
+            new SSRClientPlugin({
+                filename: `${ buildEnv ==='production' ? `${projectName}.client.json` : `${projectName}.client.${buildEnv}.json` }`
+            }),
+            // new webpack.BannerPlugin({
+            // banner: transformSync(biliBanner, { presets: [['@babel/preset-env']] }).code,
+            // raw: true,
+            // entryOnly: true,
+            // test: new RegExp(`^${projectName}\\..*\\.js$`)
+            // })
+        ];
+        if (process.env.ONLY_CLIENT !== '1') {
+            plugins.push(new HtmlWebpackPlugin({
+                filename: buildEnv === 'production' ? `${projectName}.template.html` : `${projectName}.${buildEnv}.template.html`,
+                template: path.resolve(workingpath, 'src', projectName, `template.html`),
+                inject: false,
+                hash: true,
+                minify: {
+                    removeComments: false,
+                    collapseWhitespace: mode === 'production',
+                    removeAttributeQutes: mode === 'production',
+                    minifyJS: true,
+                    minifyCSS: true
+                }
+            }));
+        }
         return merge(this._config, {
             target: 'web',
             entry: clientEntry,
             optimization: {
                 splitChunks: { chunks: 'all' }
             },
-            plugins: [
-                new HtmlWebpackPlugin({
-                    filename: buildEnv === 'production' ? `${projectName}.template.html` : `${projectName}.${buildEnv}.template.html`,
-                    template: path.resolve(workingpath, 'src', projectName, `template.html`),
-                    inject: false,
-                    hash: true,
-                    minify: {
-                        removeComments: false,
-                        collapseWhitespace: mode === 'production',
-                        removeAttributeQutes: mode === 'production',
-                        minifyJS: true,
-                        minifyCSS: true
-                    }
-                }),
-                new HtmlWebpackPlugin({
-                    filename: buildEnv === 'production' ? `${projectName}.degrade.html` : `${projectName}.${buildEnv}.degrade.html`,
-                    template: path.resolve(__dirname, './html-webpack-template.js'),
-                    realTemplate: degradeHtmlPath || path.resolve(workingpath, 'src', projectName, 'degrade.html'),
-                    title: defaultTitle,
-                    meta: defaultMeta,
-                    inject: 'body',
-                    minify: {
-                        removeComments: true,
-                        collapseWhitespace: true,
-                        removeAttributeQuotes: true
-                    }
-                }),
-                new webpack.DefinePlugin({
-                    'process.env': {
-                        NODE_ENV: `'${buildEnv}'`,
-                        [`REAÇT_ENV`]: '"client"',
-                    }
-                }),
-                new SSRClientPlugin({
-                    filename: `${ buildEnv ==='production' ? `${projectName}.client.json` : `${projectName}.client.${buildEnv}.json` }`
-                }),
-                // new webpack.BannerPlugin({
-                // banner: transformSync(biliBanner, { presets: [['@babel/preset-env']] }).code,
-                // raw: true,
-                // entryOnly: true,
-                // test: new RegExp(`^${projectName}\\..*\\.js$`)
-                // })
-            ]
+            plugins: plugins
         }, customConfig);
     }
 
