@@ -8,7 +8,7 @@ export default class App extends Component {
         return (
             <div className="home-page">
                 <HeaderNav></HeaderNav>
-                <div className="page-body"><span>amazing</span></div>
+                <div className="page-body"><span>amazing.</span></div>
             </div>
         )
     }
