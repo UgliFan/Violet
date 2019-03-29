@@ -6,9 +6,10 @@ class CanvasBg {
             $cas.id = 'cas';
             window.document.body.appendChild($canvas);
         }
-        $cas.width = window.document.documentElement.offsetWidth;
-        $cas.height = window.document.documentElement.offsetHeight;
+        $cas.width = $cas.offsetWidth;
+        $cas.height = $cas.offsetHeight;
         this.$cas = $cas;
+        this.offset = this.getOffset(this.$cas);
         this.ctx = this.$cas.getContext('2d');
         this.rgb = '255'; // 线条颜色值
         this.extendDis = 5; // 可超出的画布边界
@@ -94,12 +95,23 @@ class CanvasBg {
     }
     moveHandler(e) {
         e = e || window.event;
-        this.warea.x = e.clientX - this.$cas.offsetLeft;
-        this.warea.y = e.clientY - this.$cas.offsetTop;
+        this.warea.x = e.clientX - this.offset.left;
+        this.warea.y = e.clientY - this.offset.top;
     }
     outHandler() {
         this.warea.x = null;
         this.warea.y = null;
+    }
+    getOffset($el) {
+        let top = $el.offsetTop;
+        let left = $el.offsetLeft;
+        let current = $el.offsetParent;
+        while (current !== null) {
+            top += current.offsetTop;
+            left += current.offsetLeft;
+            current = current.offsetParent;
+        }
+        return { top, left };
     }
     destroy() {
         window.removeEventListener('mousemove', this.moveHandler.bind(this), false);
