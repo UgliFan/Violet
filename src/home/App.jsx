@@ -5,8 +5,20 @@ import './App.less';
 
 export default class App extends Component {
     componentDidMount() {
-        let bgAnime = new AnimeBackground();
-        bgAnime.runAnime();
+        const h5Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod'];
+        var isH5 = false;
+        for (var i = 0; i < h5Agents.length; i++) {
+            if (window.navigator.userAgent.indexOf(h5Agents[i]) > -1) {
+                isH5 = true; break;
+            }
+        }
+        if (!isH5) {
+            let bgAnime = new AnimeBackground();
+            bgAnime.runAnime();
+        }
+    }
+    componentWillUnmount() {
+        // bgAnime.destroy();
     }
     render() {
         return (
