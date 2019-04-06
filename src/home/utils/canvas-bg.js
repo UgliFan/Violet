@@ -21,8 +21,9 @@ class CanvasBg {
                 };
             })();
         }
+        this.raf = null;
         this.warea = { x: null, y: null };
-        this.bindEvents();
+        this.running = false;
         this.createParticle();
     }
     createParticle() { // 创建粒子
@@ -38,9 +39,24 @@ class CanvasBg {
         this.dots = dots;
     }
     runAnime() {
-        this.ctx.clearRect(0, 0, this.$cas.width, this.$cas.height);
-        this.bubDrawLine([this.warea].concat(this.dots));
-        window.raf(this.runAnime.bind(this));
+        if (!this.running) {
+            this.running = true;
+            this.bindEvents();
+            const anime = () => {
+                this.ctx.clearRect(0, 0, this.$cas.width, this.$cas.height);
+                this.bubDrawLine([this.warea].concat(this.dots));
+                this.raf = window.raf(anime.bind(this));
+            };
+            this.raf = window.raf(anime);
+        }
+    }
+    stop() {
+        if (this.running) {
+            this.running = false;
+            this.removeEvents();
+            window.cancelAnimationFrame(this.raf);
+            this.ctx.clearRect(0, 0, this.$cas.width, this.$cas.height);
+        }
     }
     bubDrawLine(ndots) {
         let ndot;
@@ -93,6 +109,10 @@ class CanvasBg {
         window.addEventListener('mousemove', this.moveHandler.bind(this), false);
         window.addEventListener('mouseout', this.outHandler.bind(this), false);
     }
+    removeEvents() {
+        window.removeEventListener('mousemove', this.moveHandler.bind(this), false);
+        window.removeEventListener('mouseout', this.outHandler.bind(this), false);
+    }
     moveHandler(e) {
         e = e || window.event;
         this.warea.x = e.clientX - this.offset.left;
@@ -113,10 +133,7 @@ class CanvasBg {
         }
         return { top, left };
     }
-    destroy() {
-        window.removeEventListener('mousemove', this.moveHandler.bind(this), false);
-        window.removeEventListener('mouseout', this.outHandler.bind(this), false);
-    }
+    destroy() {}
 }
 
 export default CanvasBg;

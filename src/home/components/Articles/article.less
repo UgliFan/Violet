@@ -1,0 +1,86 @@
+@px2rem: 1 / 100;
+.articles-wrapper {
+    position: relative;
+    width: 100%;
+    padding: unit(40 * @px2rem, rem);
+    z-index: 1;
+    .wrapper-title {
+        height: unit(50 * @px2rem, rem);
+        line-height: unit(50 * @px2rem, rem);
+        font-size: unit(30 * @px2rem, rem);
+        color: #fff;
+    }
+    .article-list {
+        width: 100%;
+        border-radius: unit(10 * @px2rem, rem);
+        background-color: rgba(255,255,255,.2);
+        height: unit(700 * @px2rem, rem);
+        padding: unit(40 * @px2rem, rem);
+        overflow: auto;
+        .article-item {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            font-size: unit(24 * @px2rem, rem);
+            height: unit(170 * @px2rem, rem);
+            text-decoration: none;
+            padding-bottom: unit(20 * @px2rem, rem);
+            margin-bottom: unit(20 * @px2rem, rem);
+            border-bottom: unit(2 * @px2rem, rem) solid rgba(255,255,255,.2);
+            color: #fff;
+            cursor: pointer;
+            &:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+            .article-cover {
+                flex: 1 0 auto;
+                display: block;
+                height: unit(150 * @px2rem, rem);
+                margin-left: unit(40 * @px2rem, rem);
+            }
+            .article-info {
+                min-width: 60%;
+                .title {
+                    height: unit(40 * @px2rem, rem);
+                    line-height: 1;
+                    font-size: unit(30 * @px2rem, rem);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .evaluate {
+                    font-size: unit(24 * @px2rem, rem);
+                    line-height: unit(30 * @px2rem, rem);
+                    min-height: unit(30 * @px2rem, rem);
+                    max-height: unit(60 * @px2rem, rem);
+                    display: -webkit-box!important;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    word-wrap: break-word;
+                    word-break: break-all;
+                    white-space: normal;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: #C0C4CC;
+                }
+                .other {
+                    height: unit(50 * @px2rem, rem);
+                    padding-top: unit(10 * @px2rem, rem);
+                    .source, .tags, .score, .date {
+                        display: inline-block;
+                        vertical-align: top;
+                        height: unit(40 * @px2rem, rem);
+                        line-height: unit(40 * @px2rem, rem);
+                        padding: 0 unit(10 * @px2rem, rem);
+                        border-radius: unit(10 * @px2rem, rem);
+                        background-color: #C0C4CC;
+                        color: #fff;
+                        font-size: unit(24 * @px2rem, rem);
+                        margin-right: unit(20 * @px2rem, rem);
+                    }
+                }
+            }
+        }
+    }
+}

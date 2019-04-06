@@ -22,10 +22,39 @@
         font-size: unit(24 * @px2rem, rem);
         transition: opacity .3s ease;
     }
+    .canvas-switch {
+        position: absolute;
+        top: unit(20 * @px2rem, rem);
+        right: unit(20 * @px2rem, rem);
+        height: unit(44 * @px2rem, rem);
+        width: unit(74 * @px2rem, rem);
+        background-color: #fff;
+        border-radius: unit(22 * @px2rem, rem);
+        border: unit(2 * @px2rem, rem) solid rgba(0,0,0,.2);
+        transform: all .3s ease-out;
+        cursor: pointer;
+        &.actived {
+            background-color: #4dc86f;
+            .switch-btn {
+                transform: translateX(unit(30 * @px2rem, rem));
+            }
+        }
+        .switch-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: unit(40 * @px2rem, rem);
+            height: unit(40 * @px2rem, rem);
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 unit(10 * @px2rem, rem) unit(20 * @px2rem, rem) 0 rgba(0,0,0,.4);
+            transition: transform .3s ease;
+        }
+    }
     .view-count {
         position: absolute;
         top: 0;
-        right: 0;
+        right: unit(120 * @px2rem, rem);
         height: unit(80 * @px2rem, rem);
         line-height: unit(80 * @px2rem, rem);
         padding: 0 unit(20 * @px2rem, rem);
